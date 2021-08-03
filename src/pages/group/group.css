@@ -1,0 +1,85 @@
+.groupsCont {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  height: 400px;
+  width: 600px;
+  background-color: #2b2929;
+  /* cursor: pointer; */
+  box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22);
+  -webkit-box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22);
+  transform: translateY(0px);
+  transition: all 0.5s;
+}
+
+.groupsCont.show {
+  transform: translateY(140px) translateX(275px) scale(0);
+  visibility: hidden;
+}
+
+.groupBody {
+  display: flex;
+  width: 95%;
+  margin: 10px;
+  /* align-items: center;
+  margin: auto; */
+}
+
+.groupBodyLeft {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.groupBodyRight {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.groupAvatal {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  margin-top: 10px;
+  cursor: pointer;
+  box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22);
+  -webkit-box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22);
+}
+
+.groupAvatal.image {
+  margin-top: 0px;
+  outline: none;
+  border: none;
+}
+
+.groupName {
+  margin-top: 30px;
+}
+
+.inputGroup {
+  width: 100%;
+}
+
+.textGroup {
+  height: auto;
+}
+
+.userstable{
+  height: 90%;
+  margin-top: 10px;
+}
+
+.done:hover{
+  text-decoration: underline;
+}
+
+.createG{
+  margin-top: 0px;
+  margin-right: 10px;
+}

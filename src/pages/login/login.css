@@ -1,0 +1,157 @@
+.RegisterContainer {
+  width: 100vw;
+  height: 100vh;
+  /* background-image: url("https://images.unsplash.com/photo-1551043061-38bceaace400?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=80"); */
+  object-fit: cover;
+  background-position: center;
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  /* filter: blur(1px);
+  -webkit-filter: blur(1px); */
+}
+
+/* .RegisterContainer {
+  position: absolute;
+  top: 0%;
+  left: 0%; 
+} */
+
+.RegisterInnerContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+.RegisterLeftContainer {
+  flex: 1;
+  color: #ccc;
+  position: relative;
+}
+
+.RegisterLeftTextContainer {
+  align-content: center;
+}
+
+.RegisterLeftText {
+  border: none;
+  text-align: center;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+}
+
+/* .RegisterLeftTextH1 {
+} */
+
+.RegisterLeftH1 {
+  font-weight: 700;
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.RegisterLeftdisc {
+  font-weight: 700;
+  color: #ddd;
+}
+
+.RegisterRightContainer {
+  flex: 1;
+  margin-top: 80px;
+}
+
+.RegisterRight {
+  width: 100%;
+}
+
+.RegisterRightImageCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+
+
+.RegisterRightImage {
+  height: 120px;
+  width: 120px;
+  border-radius: 20px;
+  box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22);
+  -webkit-box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22);
+  margin-bottom: 30px;
+  /* justify-content: center; */
+  /* align-self: center; */
+}
+
+.RegisterRightLogo {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.RegisterRightText {
+  margin-top: 40px;
+  margin-right: 40px;
+  font-weight: 700;
+  font-size: 30px;
+  color: #bbb;
+}
+
+.RegisterInput {
+  width: 80%;
+  height: 40px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+  color: #bbb;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.RegisterInput::placeholder {
+  color: #bbb;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.RegisterInput:focus,
+.RegisterInput:active {
+  border: none;
+  border-bottom: 1px solid #aaa;
+  outline: none;
+  transition: all 0.5s;
+}
+
+.submitForm {
+  width: 40%;
+  height: 40px;
+  border: none;
+  color: #bbb;
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 15px;
+}
+
+.RegisterInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.RegisterLogin {
+  color: #bbb;
+  font-weight: 400;
+  font-size: 15px;
+  margin-bottom: 0;
+}
+
+.RegisterCondi {
+  color: #bbb;
+  font-weight: 400;
+  font-size: 12px;
+}

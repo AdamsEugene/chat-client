@@ -1,0 +1,32 @@
+.ImgCont {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    height: 400px;
+    width: 600px;
+    background-color: #2b2929;
+    z-index: 1;
+    /* cursor: pointer; */
+    box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22);
+    -webkit-box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22);
+    -moz-box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22);
+    visibility: hidden;
+  }
+  
+
+.imgCont {
+  text-align: center;
+}
+
+.statusImages {
+  height: 400px;
+  width: 600px;
+}
+
+.caption {
+  position: absolute;
+  top: 85%;
+  left: 1%;
+  transform: translateY(-50%, -50%);
+  color: yellowgreen;
+}

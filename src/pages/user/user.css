@@ -1,0 +1,159 @@
+.userCont {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  height: 400px;
+  width: 600px;
+  background-color: #2b2929;
+  z-index: 1;
+  /* cursor: pointer; */
+  box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22);
+  -webkit-box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22);
+  transform: translateY(0px);
+  transition: all 0.5s;
+}
+
+.userCont.visible {
+  transform: translateY(-400px) translateX(-30px) scale(0);
+  visibility: hidden;
+}
+
+.userHeader {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 10px;
+  border-bottom: 1px solid #ccc;
+  padding: 5px;
+}
+
+.userL {
+  font-size: 20px;
+  font-weight: bold;
+  color: #888;
+}
+
+.userR {
+  justify-content: center;
+  /* padding: 0 5px 5px 0; */
+  background-color: red;
+  width: 30px;
+  text-align: center;
+  height: 30px;
+  border-radius: 10px;
+  margin-top: 0px;
+  position: relative;
+  cursor: pointer;
+}
+
+.closeUser {
+  font-weight: 700;
+  font-size: 30px;
+  position: absolute;
+  top: -6px;
+  right: 6px;
+  color: white;
+  /* margin-top: 100px */
+}
+
+.userBody {
+  /* box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22);
+  -webkit-box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: -1px 0px 5px 3px rgba(0, 0, 0, 0.22); */
+  height: calc(100% - 60px);
+  width: 95%;
+  align-items: center;
+  margin: auto;
+}
+
+.userForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userBodyL {
+  flex: 1.5;
+  margin: 20px auto;
+}
+
+.userBodyR {
+  flex: 1;
+  margin-top: 10px;
+}
+
+.userImage {
+  display: flex;
+  align-items: center;
+}
+
+.upload {
+  height: 40px;
+  width: 40px;
+  background-color: #ccc;
+  border-radius: 10px;
+  margin-left: 30px;
+  cursor: pointer;
+  position: relative;
+}
+
+.uploadIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 35px !important;
+}
+
+.uploadStatus {
+  display: flex;
+  flex-direction: column;
+  height: 140px;
+  width: 100%;
+  margin-top: -5px;
+  /* background-color: royalblue; */
+}
+
+.uploadedStatus {
+  height: 110px;
+  width: 100%;
+  /* background-color: black; */
+}
+
+.uploadButton {
+  background-color: #777;
+  height: 30px;
+  width: 100%;
+  /* border-radius: 20px; */
+  text-align: center;
+  padding-top: 2px;
+  font-weight: 500;
+  font-size: 15px;
+  color: #ccc;
+  cursor: pointer;
+  margin-top: 20px;
+  z-index: 1;
+}
+
+.done {
+  margin-top: 25px;
+  text-align: end;
+  font-weight: 500;
+  font-size: 15px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.statusCo {
+  display: flex;
+  margin-top: 10px;
+}
+
+.statusU {
+  margin-top: 10px;
+  margin-right: 20px;
+  color: #bbb;
+  font-weight: 700;
+  font-size: 14px;
+}

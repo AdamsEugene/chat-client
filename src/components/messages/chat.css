@@ -1,0 +1,248 @@
+.messageList {
+  display: flex;
+  /* margin-bottom: 15px; */
+  /* background-color: #fff; */
+  padding: 5px;
+  border-radius: 10px;
+  /* cursor: pointer; */
+  border: 1px solid transparent;
+  width: 95%;
+  margin: 0 auto 6px auto;
+  align-self: center;
+}
+
+.messageList.me {
+  justify-content: flex-end;
+}
+
+.messageList.admin {
+  justify-content: center;
+}
+
+/* .messageList.StartUs {
+  background-color: red;
+  margin: 0 auto 0px auto;
+} */
+
+.messageList.notStart{
+  /* background-color: yellow; */
+  margin-top: -20px;
+}
+
+.messageAm {
+  display: flex;
+}
+
+.messageNameAdmin {
+  margin-right: 5px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.messageDetails.admin {
+  border-radius: 20px;
+}
+
+.messageList.active {
+  border: 1px solid rgb(238, 215, 228);
+  background-color: rgb(238, 215, 228);
+}
+
+.messageAvatal {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.messageAvatal.me {
+  margin-right: 0px;
+  margin-left: 10px;
+}
+
+.messageAvatal.logo {
+  margin: 5px 0px 0 10px;
+}
+
+.messageAvatal[alt] {
+  color: #555;
+  font-size: 30px;
+  font-weight: 700;
+  border: none;
+  outline: none;
+}
+
+.msgbody {
+  display: flex;
+  flex-direction: column;
+}
+
+.messageDetails {
+  display: flex;
+  flex-direction: column;
+  background-color: #777;
+  padding: 5px;
+  border-radius: 0px 10px 10px 10px;
+  position: relative;
+}
+
+.messageDetails.me {
+  background-color: #222;
+  border-radius: 10px 0px 10px 10px;
+}
+
+.messageDetails.admin {
+  background-color: #444;
+}
+
+.message {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: -2px;
+}
+
+.messageName {
+  font-size: 17px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.messageStatus {
+  height: 17px;
+  width: 17px;
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+}
+
+.number {
+  font-size: 14px;
+  color: #fff;
+}
+
+.messageCM {
+  font-size: 15px;
+  font-weight: 400;
+  color: #eee;
+  min-width: 100px;
+  max-width: 400px;
+  max-height: 400px;
+  /* overflow-y: unset; */
+  padding: 4px 25px 4px 4px;
+  /* width: 400px; */
+}
+
+.messageCM.admin {
+  padding: 2px 5px;
+  max-width: 500px;
+}
+
+.Time {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0px 10px 5px 0;
+}
+
+.Time.me {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Time.nospace{
+  margin: 0px 10px 0px 0;
+}
+
+.Time.admin {
+  display: flex;
+  justify-content: center;
+  margin-left: 5px;
+}
+
+.messageTime {
+  color: #fff;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.messageTime.admin {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.more {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  height: 25px;
+  width: 25px;
+  /* background-color: #dff; */
+  border-radius: 50%;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.groupic {
+  position: absolute;
+  top: 5px;
+  right: -120px;
+  height: 25px;
+  width: 25px;
+  background-color: #333;
+  border-radius: 50%;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  /* visibility: hidden; */
+}
+
+.moreIcon {
+  font-size: 18px !important;
+  color: #aaa;
+  margin-top: 4px;
+  transition: all 0.5s;
+}
+
+.seen {
+  position: absolute;
+  bottom: 0px;
+  right: 2px;
+  height: 20px;
+  width: 20px;
+  /* background-color: #dff; */
+  border-radius: 50%;
+  text-align: center;
+  justify-content: center;
+  transition: all 0.5s;
+}
+
+.more:hover,
+.seen:hover {
+  background-color: #444;
+}
+
+.checkSeen {
+  font-size: 15px !important;
+  color: #aaa;
+  transition: all 0.5s;
+}
+
+.checkSeen.two {
+  color: blue;
+}
+
+.moreIcon:hover,
+.checkSeen:hover {
+  color: #eee;
+}
+
+.followButtonClass{
+  /* visibility: hidden !important; */
+  background-color: #888 !important;
+  height: 30px !important;
+  width: 30px !important;
+  border-radius: 50% !important;
+  margin-right: 5px;
+}
