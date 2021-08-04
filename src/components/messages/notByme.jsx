@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { format } from "timeago.js";
 import handleViewport from "react-in-viewport";
+
 import { setSeen } from "../../redux/actions";
 import Popup from "../others/popup";
 import DeletedMnot from "./deletedMgs";
@@ -10,6 +11,8 @@ export default function NotByme({ message, key }) {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.users.currentUser);
   const user = useSelector((state) => state.users.myData);
+  const socket = useSelector((state) => state.settings.socket);
+
 
   const Block = (props) => {
     const { forwardedRef } = props;
@@ -95,7 +98,14 @@ export default function NotByme({ message, key }) {
   return (
     <ViewportBlock
       onEnterViewport={() =>
-        !message.seen ? dispatch(setSeen(user.accessToken, message._id)) : ""
+        message._id
+          ? !message.seen
+            ? dispatch(setSeen(user.accessToken, message._id))
+            : ""
+          : socket.emit("seen message", {
+              id: currentUser._id,
+              time: message.createdAt,
+            })
       }
     />
   );

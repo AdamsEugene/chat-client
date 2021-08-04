@@ -17,6 +17,7 @@ export default function AllUsers() {
   const dispatch = useDispatch();
   const myData = useSelector((state) => state.users.myData);
   const users = useSelector((state) => state.users.users);
+  const activeUsers = useSelector((state) => state.users.activeUsers);
 
   const [activeUser, setActiveUser] = useState();
 
@@ -45,15 +46,17 @@ export default function AllUsers() {
                 } `}
                 onClick={() => setActive(user._id)}
               >
-                <img
-                  className="homeLeftUserAvatal"
-                  src={
-                    user.profilePics[0]
-                      ? `data:${user.profilePics[0].contentType};base64,${user.profilePics[0].image}`
-                      : "https://www.irishrsa.ie/wp-content/uploads/2017/03/default-avatar.png"
-                  }
-                  alt="N"
-                />
+                <div className="offline">
+                  <img
+                    className="homeLeftUserAvatal"
+                    src={
+                      user.profilePics[0]
+                        ? `data:${user.profilePics[0].contentType};base64,${user.profilePics[0].image}`
+                        : "https://www.irishrsa.ie/wp-content/uploads/2017/03/default-avatar.png"
+                    }
+                    alt="N"
+                  />
+                </div>
                 <div className="homeLeftUserDetails">
                   <div className="homeLeftUser">
                     <div className="homeLeftUserName">{user.name}</div>
@@ -64,7 +67,11 @@ export default function AllUsers() {
                     </div>
                   </div>
                   <div className="homeLeftUserCMC">
-                    <div className="homeLeftUserCM">Online</div>
+                    <div className="homeLeftUserCM">
+                      {activeUsers && activeUsers.includes(user._id)
+                        ? "Online"
+                        : "Offline"}
+                    </div>
                     <div className={`states ${status[user.status]}`}></div>
                   </div>
                 </div>

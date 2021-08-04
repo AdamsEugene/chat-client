@@ -15,6 +15,7 @@ export default function Friends() {
   const dispatch = useDispatch();
   const myData = useSelector((state) => state.users.myData);
   const friends = useSelector((state) => state.users.friends);
+  const activeUsers = useSelector((state) => state.users.activeUsers);
 
   const [activeUser, setActiveUser] = useState();
 
@@ -47,15 +48,23 @@ export default function Friends() {
               }  ${activeUser === friend._id ? "active" : ""}  `}
               onClick={() => setActive(friend._id)}
             >
-              <img
-                className="homeLeftUserAvatal"
-                src={
-                  friend.profilePics.length !== 0
-                    ? `data:${friend.profilePics[0].contentType};base64,${friend.profilePics[0].image}`
-                    : "https://www.irishrsa.ie/wp-content/uploads/2017/03/default-avatar.png"
-                }
-                alt="N"
-              />
+              <div
+                className={`${
+                  activeUsers && activeUsers.includes(friend._id)
+                    ? "online"
+                    : "offline"
+                }  `}
+              >
+                <img
+                  className="homeLeftUserAvatal"
+                  src={
+                    friend.profilePics.length !== 0
+                      ? `data:${friend.profilePics[0].contentType};base64,${friend.profilePics[0].image}`
+                      : "https://www.irishrsa.ie/wp-content/uploads/2017/03/default-avatar.png"
+                  }
+                  alt="N"
+                />
+              </div>
               <div className="homeLeftUserDetails">
                 <div className="homeLeftUser">
                   <div className="homeLeftUserName">{friend.name}</div>

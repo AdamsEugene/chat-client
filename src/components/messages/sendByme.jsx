@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { format } from "timeago.js";
 import handleViewport from "react-in-viewport";
 import DoneIcon from "@material-ui/icons/Done";
 
-// import { setCountToZero, setCount } from "../redux/actions";
+// import { setCountToZero, setCount } from "../redux/actions"
+import { range } from "../../redux/configs/reorderData";
 
 import DoneAllIcon from "@material-ui/icons/DoneAll";
 import Popup from "../others/popup";
@@ -13,6 +14,20 @@ import DeletedMnot from "./deletedMgs";
 export default function SendByme({ message, key, count }) {
   // const dispatch = useDispatch();
   const user = useSelector((state) => state.users.myData);
+  const socket = useSelector((state) => state.settings.socket);
+  const activeUsers = useSelector((state) => state.users.activeUsers);
+
+  const [seens, setSeens] = useState([]);
+
+  useEffect(() => {
+    socket.on("set seen", (seen) => {
+      setSeens(seen);
+    });
+  }, [socket]);
+
+  const rangeOutput = !message.seen
+    ? range(new Date(message.createdAt).getTime() - 50, 50, 1)
+    : [];
 
   const Block = (props) => {
     // inViewport,
@@ -59,8 +74,11 @@ export default function SendByme({ message, key, count }) {
                       }
                     />
                     <div className="seen">
-                      {message.seen ? (
-                        <DoneAllIcon className="checkSeen two" />
+                      {message.seen ||
+                      rangeOutput.some((v) => seens.includes(v)) ? (
+                        <DoneAllIcon className={`checkSeen two`} />
+                      ) : activeUsers.includes(message.receiver) ? (
+                        <DoneAllIcon className={`checkSeen two default`} />
                       ) : (
                         <DoneIcon className="checkSeen" />
                       )}
@@ -107,9 +125,5 @@ export default function SendByme({ message, key, count }) {
 
   const ViewportBlock = handleViewport(Block /** options: {}, config: {} **/);
 
-  return (
-    <ViewportBlock
-      onEnterViewport={() => ""}
-    />
-  );
+  return <ViewportBlock onEnterViewport={() => ""} />;
 }

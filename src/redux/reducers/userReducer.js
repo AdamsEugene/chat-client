@@ -6,6 +6,7 @@ const initialState = {
   currentUser: {},
   friends: [],
   error: 0,
+  activeUsers: [],
 };
 
 export const userRrducer = (state = initialState, action) => {
@@ -24,6 +25,30 @@ export const userRrducer = (state = initialState, action) => {
 
     case ActionType.FETCH_ALL_USERS:
       return { ...state, users: action.payload };
+
+    case ActionType.ACTIVE_USERS:
+      if (state.activeUsers) {
+        if (state.activeUsers.length > 0) {
+          return {
+            ...state,
+            activeUsers: [...state.activeUsers, ...action.payload],
+          };
+        }
+        return {
+          ...state,
+          activeUsers: [...action.payload],
+        };
+      }
+      return {
+        ...state,
+        activeUsers: [...action.payload],
+      };
+
+    case ActionType.USER_LEFT:
+      return {
+        ...state,
+        activeUsers: action.payload,
+      };
 
     case ActionType.CURRENT_USER:
       return {

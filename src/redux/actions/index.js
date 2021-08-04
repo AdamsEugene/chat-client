@@ -10,6 +10,8 @@ import {
   block_user,
   clear_Error,
   all_Friends,
+  active_Users,
+  user_Left,
 } from "./userActions";
 
 import { user_Group, current_Group, create_Group } from "./groupActions";
@@ -32,6 +34,8 @@ import {
   updatad_Message,
   set_Seen,
   send_Message_Socket,
+  received_Message,
+  local_Seen,
 } from "./messagesAction";
 
 export const register = registerUser;
@@ -63,3 +67,7 @@ export const allFriends = all_Friends;
 export const createNewGroup = create_Group;
 export const connectToSocket = connect_To_Socket;
 export const sendMessageSocket = send_Message_Socket;
+export const receivedMessage = received_Message;
+export const activeUsers = active_Users;
+export const userLeft = user_Left;
+export const localSeen = local_Seen;

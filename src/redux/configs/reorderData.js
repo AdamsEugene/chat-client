@@ -18,3 +18,19 @@ export const reorder = (data) => {
   }
   return container;
 };
+
+export const range = (start, stop, step) => {
+  let items = [];
+  if (step === 0) step = 1;
+  if (step < 0) {
+    step = Math.abs(step);
+    for (let i = start + stop - 1; i >= start; i -= step) {
+      items.push(i);
+    }
+  } else {
+    for (let i = start; i < start + stop; i += step) {
+      items.push(i);
+    }
+  }
+  return items;
+};

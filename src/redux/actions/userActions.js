@@ -65,6 +65,20 @@ export const current_User = (id) => {
   };
 };
 
+export const active_Users = (data) => {
+  return {
+    type: ActionType.ACTIVE_USERS,
+    payload: data,
+  };
+};
+
+export const user_Left = (data) => {
+  return {
+    type: ActionType.USER_LEFT,
+    payload: data,
+  };
+};
+
 export const all_Friends = () => {
   return { type: ActionType.ALL_FRIENDS };
 };

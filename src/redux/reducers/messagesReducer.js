@@ -2,7 +2,6 @@ import { ActionType } from "../configs/actionType";
 import { reorder } from "../configs/reorderData";
 
 const initialState = {
-  message: {},
   messages: [],
   ourChat: [],
   mgs: {},
@@ -14,14 +13,12 @@ export const messagesReducer = (state = initialState, action) => {
       return {
         ...state,
         messages: [...state.messages, action.payload],
-        message: action.payload,
       };
 
     case ActionType.SEND_MESSAGE_SOCKET:
       return {
         ...state,
         messages: [...state.messages, action.payload],
-        message: action.payload,
       };
 
     case ActionType.ALL_MY_MESSAGE:
@@ -52,10 +49,38 @@ export const messagesReducer = (state = initialState, action) => {
             : [],
       };
 
+    case ActionType.RECEIVED_MESSAGE:
+      return {
+        ...state,
+        ourChat:
+          state.messages.length > 0
+            ? reorder(
+                state.messages.filter(
+                  (message) =>
+                    (message.sender === action.payload.myId ||
+                      message.receiver === action.payload.myId) &&
+                    (message.sender === action.payload.yourId ||
+                      message.receiver === action.payload.yourId)
+                )
+              )
+            : [],
+      };
+
     case ActionType.DELETE_FROM_ME:
-      return { ...state, mgs: action.payload };
+      if ("sender" in action ? action.payload : {}) {
+        return { ...state, mgs: action.payload };
+      } else {
+        return state;
+      }
 
     case ActionType.SET_SEEN:
+      if ("sender" in action ? action.payload : {}) {
+        return { ...state, mgs: action.payload };
+      } else {
+        return state;
+      }
+
+    case ActionType.LOCAL_SEEN:
       return { ...state, mgs: action.payload };
 
     case ActionType.UPDATED_MESSAGE:

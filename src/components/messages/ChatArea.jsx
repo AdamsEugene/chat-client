@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { css } from "@emotion/css";
 import ScrollToBottom from "react-scroll-to-bottom";
@@ -10,6 +10,9 @@ import {
   updatadMessage,
   connectToSocket,
   sendMessageSocket,
+  receivedMessage,
+  activeUsers,
+  userLeft,
 } from "../../redux/actions";
 
 import "./chat.css";
@@ -24,13 +27,14 @@ export default function ChatArea() {
   const messages = useSelector((state) => state.messages.ourChat);
   const allMgs = useSelector((state) => state.messages.messages);
   const mgs = useSelector((state) => state.messages.mgs);
+  const localSeen = useSelector((state) => state.messages.lseen);
   const backgroungImage = useSelector(
     (state) => state.settings.backgroundImage
   );
   const socket = useSelector((state) => state.settings.socket);
 
   // const [onlineUsers, setOnlineUsers] = useState([]);
-  const [onlineUsers, setOnlineUsers] = useState([]);
+  // const [onlineUsers, setOnlineUsers] = useState([]);
 
   const ROOT_CSS = css({
     height: "83.5vh",
@@ -66,8 +70,8 @@ export default function ChatArea() {
   }, [mgs, dispatch]);
 
   useEffect(() => {
-    dispatch(ourChat(user._id, currentUser ? currentUser._id : ""));
-  }, [currentUser, dispatch, user, mgs, allMgs]);
+    dispatch(ourChat(user?._id, currentUser?._id));
+  }, [currentUser?._id, dispatch, user?._id, mgs, allMgs]);
 
   useEffect(() => {
     if (user._id) dispatch(connectToSocket());
@@ -78,22 +82,22 @@ export default function ChatArea() {
   }, [socket, user._id]);
 
   useEffect(() => {
-    socket?.on("newMember", (member) =>
-      setOnlineUsers((prev) => [...prev, ...member])
-    );
+    socket?.on("newMember", (member) => dispatch(activeUsers(member)));
 
-    socket?.on("someone left", (members) => setOnlineUsers([...members]));
-  }, [socket]);
+    socket?.on("someone left", (members) => dispatch(userLeft(members)));
+  }, [socket, dispatch]);
 
   useEffect(() => {
     socket?.on("newMessage", (data) => {
       dispatch(sendMessageSocket(data));
-      dispatch(ourChat(user._id, currentUser?._id));
-      console.log(data);
     });
-  }, [socket, dispatch, user._id, currentUser?._id]);
+  }, [socket, dispatch]);
 
-  console.log(onlineUsers);
+  useEffect(() => {
+    dispatch(receivedMessage(user._id, currentUser?._id));
+  }, [dispatch, user._id, currentUser?._id, allMgs, localSeen]);
+
+  // console.log(onlineUsers);
 
   return (
     <div>
@@ -106,7 +110,7 @@ export default function ChatArea() {
           <>
             {messages.length > 0 ? (
               messages.map((message, i) =>
-                Object.keys(message).length !== 0 ? (
+                message && Object.keys(message).length !== 0 ? (
                   <span key={i}>
                     {message.sender === "admin" ? (
                       <ByAdmin message={message} key={i} count={i} />

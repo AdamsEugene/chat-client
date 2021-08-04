@@ -5,6 +5,10 @@ export const our_Chat = (myId, yourId) => {
   return { type: ActionType.OUR_CHAT, payload: { myId, yourId } };
 };
 
+export const received_Message = (myId, yourId) => {
+  return { type: ActionType.RECEIVED_MESSAGE, payload: { myId, yourId } };
+};
+
 export const send_Message = (accessToken, data) => async (dispatch) => {
   try {
     const message = await instance(accessToken).post(`/api/messages`, data);
@@ -38,6 +42,10 @@ export const set_Seen = (accessToken, id) => async (dispatch) => {
     const message = await instance(accessToken).put(`/api/messages/seen/${id}`);
     dispatch({ type: ActionType.SET_SEEN, payload: message.data });
   } catch (_err) {}
+};
+
+export const local_Seen = (time) => {
+  return { type: ActionType.LOCAL_SEEN, payload: time };
 };
 
 export const updatad_Message = () => {

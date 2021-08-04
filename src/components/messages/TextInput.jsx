@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { sendMessage, ourChat } from "../../redux/actions";
+import { sendMessage } from "../../redux/actions";
 import SendIcon from "@material-ui/icons/Send";
 import AttachmentIcon from "@material-ui/icons/Attachment";
 import CameraAltIcon from "@material-ui/icons/CameraAlt";
@@ -18,7 +18,26 @@ export default function TextInput() {
     setMessage(e.target.value);
   };
 
-  // console.log(socket);
+  let typing = false;
+  let timeout = undefined;
+
+  const timeOut = () => {
+    typing = false;
+    socket.emit("not typing", user._id);
+    console.log("not typing");
+  };
+
+  const handleIsTyping = (e) => {
+    if (!typing) {
+      typing = true;
+      console.log("is typing");
+      socket.emit("is typing", user._id);
+      timeout = setTimeout(timeOut, 5000);
+    } else {
+      clearTimeout(timeout);
+      timeout = setTimeout(timeOut, 5000);
+    }
+  };
 
   const handleSubmit = (e) => {
     if (message) {
@@ -37,10 +56,10 @@ export default function TextInput() {
         seen: false,
         deleteFromMe: { sender: false, receiver: false },
         deleteFromAll: false,
-        createdAt: Date.now,
+        createdAt: Date.now(),
       };
       socket.emit("sendMessage", socketMsgData);
-      dispatch(ourChat(user._id, currentUser ? currentUser._id : ""));
+      // dispatch(ourChat(user._id, currentUser ? currentUser._id : ""));
     }
   };
 
@@ -65,7 +84,9 @@ export default function TextInput() {
           disabled={disable}
           onChange={(e) => handleInputChange(e)}
           value={message}
-          onKeyPress={(e) => (e.key === "Enter" ? handleSubmit(e) : null)}
+          onKeyPress={(e) =>
+            e.key === "Enter" ? handleSubmit(e) : handleIsTyping(e)
+          }
           autoFocus={disable}
         />
         <div

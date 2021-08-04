@@ -45,16 +45,20 @@ export default function Groups() {
               } `}
               onClick={() => setActive(group._id)}
             >
-              <img
-                className="homeLeftUserAvatal"
-                src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=676&q=80"
-                alt="N"
-              />
+              <div className="offline">
+                <img
+                  className="homeLeftUserAvatal"
+                  src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=676&q=80"
+                  alt="N"
+                />
+              </div>
               <div className="homeLeftUserDetails">
                 <div className="homeLeftUser">
                   <div className="nameCont">
                     <div className="homeLeftUserName ">{group.name}</div>
-                    <div className="homeLeftUserName groupDics">{group.dics}</div>
+                    <div className="homeLeftUserName groupDics">
+                      {group.dics}
+                    </div>
                   </div>
                   <Popup user={false} classs={true} id={group._id} />
                 </div>

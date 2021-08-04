@@ -233,6 +233,10 @@
   color: blue;
 }
 
+.checkSeen.two.default{
+  color: #aaa;
+}
+
 .moreIcon:hover,
 .checkSeen:hover {
   color: #eee;
