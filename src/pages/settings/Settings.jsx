@@ -19,7 +19,7 @@ export default function Settings() {
 
   const handleChang = (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    setIsLoading(true); 
     if (e.target.files[0])
       setDisPicture(URL.createObjectURL(e.target.files[0]));
     const data = new FormData();

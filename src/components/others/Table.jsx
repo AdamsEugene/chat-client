@@ -114,15 +114,36 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function EnhancedTable({ tavleData }) {
+  // const uniqueArray = (a) =>
+  //   [...new Set(a.map((o) => JSON.stringify(o)))].map((s) => JSON.parse(s));
+    
   const users = useSelector((state) => state.users.users);
   const me = useSelector((state) => state.users.myData);
+  const currentGroup = useSelector((state) => state.groups.currentGroup);
+  const groupMembers = useSelector((state) => state.groups.members);
+  const membersLocal = useSelector((state) => state.groups.membersLocal);
 
-  const allRows =
-    users && Object.keys(users).length !== 0
-      ? users.map((user) =>
-          user._id !== me._id ? createData(user.name, user._id) : null
-        )
-      : [createData("empty")];
+  let allRows;
+  if (!currentGroup && Object.keys(currentGroup).length === 0) {
+    allRows =
+      users && Object.keys(users).length !== 0
+        ? users.map((user) =>
+            user._id !== me._id ? createData(user.name, user._id) : null
+          )
+        : [createData("empty")];
+  } else if (
+    currentGroup &&
+    Object.keys(currentGroup).length !== 0 &&
+    membersLocal.length > 0
+  ) {
+    allRows = membersLocal.map((user) =>
+      user._id !== me._id ? createData(user.name, user._id) : null
+    );
+  } else {
+    allRows = groupMembers.map((user) =>
+      user._id !== me._id ? createData(user.name, user._id) : null
+    );
+  }
 
   const rows = allRows.filter((row) => row !== null);
   const classes = useStyles();

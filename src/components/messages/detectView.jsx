@@ -6,7 +6,7 @@ const Component = (props) => {
   const Block = (props) => {
     const { inViewport, forwardedRef } = props;
     // const color = inViewport ? "#217ac0" : "#ff9800";
-    console.log(props, " out");// const text = inViewport ? "In viewport" : "Not in viewport";
+    // console.log(props, " out");// const text = inViewport ? "In viewport" : "Not in viewport";
     return <div ref={forwardedRef}>{`hello ${inViewport}`}</div>;
   };
   const ViewportBlock = handleViewport(Block /** options: {}, config: {} **/);

@@ -4,7 +4,11 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
-import { showUserDialog, showSettingsDialog } from "../../redux/actions";
+import {
+  showUserDialog,
+  showSettingsDialog,
+  showStatusDialog,
+} from "../../redux/actions";
 
 export default function Appbar() {
   const dispatch = useDispatch();
@@ -12,8 +16,14 @@ export default function Appbar() {
   const currentUser = useSelector((state) => state.users.currentUser);
   const settings = useSelector((state) => state.settings.showSettingsDialog);
   const setting = useSelector((state) => state.settings.showUserDialog);
+  const statusD = useSelector((state) => state.settings.showStatusDialog);
+  const currentGroup = useSelector((state) => state.groups.currentGroup); 
+  const groupMembers = useSelector((state) => state.groups.members);
+  const membersLocal = useSelector((state) => state.groups.membersLocal);
 
   const showUser = () => dispatch(showUserDialog(!setting));
+
+  const showStatus = () => dispatch(showStatusDialog(!statusD));
 
   const showSettings = () => dispatch(showSettingsDialog(!settings));
 
@@ -25,11 +35,14 @@ export default function Appbar() {
         <div className="appbarLeft">
           <img
             className="messageAvatal me"
+            onClick={showStatus}
             src={
               currentUser &&
               Object.keys(currentUser).length !== 0 &&
               currentUser.profilePics.length !== 0
                 ? `data:${currentUser.profilePics[0].contentType};base64,${currentUser.profilePics[0].image}`
+                : currentGroup && currentGroup.groupPics
+                ? `data:${currentGroup.groupPics.contentType};base64,${currentGroup.groupPics.image}`
                 : "https://www.irishrsa.ie/wp-content/uploads/2017/03/default-avatar.png"
             }
             alt="N"
@@ -37,6 +50,7 @@ export default function Appbar() {
           <div className="homeLeftUserCMC">
             <div className="appbarLeftUsername">
               {currentUser ? currentUser.name : ""}
+              {currentGroup ? currentGroup.name : ""}
             </div>
             <div
               className={
@@ -45,13 +59,39 @@ export default function Appbar() {
                   : ""
               }
             ></div>
-            <div className="groupMembersList">
-              <p className="names">Adams,</p>
-              <p className="names">Capo,</p>
-              <p className="names">Sam,</p>
-              <p className="names">Tom,</p>
-              <p className="names">...</p>
-            </div>
+            {currentGroup && Object.keys(currentGroup).length !== 0 ? (
+              membersLocal.length > 0 ? (
+                <div className="groupMembersList">
+                  {membersLocal.map((member, i) => {
+                    if (i < 4) {
+                      return (
+                        <p className="names" key={i}>
+                          {member._id === user._id ? "You" : member.name},
+                        </p>
+                      );
+                    } else return null;
+                  })}
+                  ...
+                </div>
+              ) : groupMembers.length > 0 ? (
+                <div className="groupMembersList">
+                  {groupMembers.map((member, i) => {
+                    if (i < 4) {
+                      return (
+                        <p className="names" key={i}>
+                          {member._id === user._id ? "You" : member.name},
+                        </p>
+                      );
+                    } else return null;
+                  })}
+                  ...
+                </div>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
           </div>
         </div>
 

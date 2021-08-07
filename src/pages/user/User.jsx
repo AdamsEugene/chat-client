@@ -50,6 +50,11 @@ export default function User() {
     // e.preventDefault();
     if (newPics.length > 0) {
       // Upload Status Images
+      let data = new FormData();
+      pics.forEach((pic) => {
+        data.append("image", pic);
+        alert("not support yet")
+      });
     }
     if (pic !== "") {
       // Upload Status Images

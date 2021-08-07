@@ -79,6 +79,20 @@ export const user_Left = (data) => {
   };
 };
 
+export const search_User = (name) => {
+  return {
+    type: ActionType.SEARCH_USER,
+    payload: name,
+  };
+};
+
+export const search_Friend = (name) => {
+  return {
+    type: ActionType.SEARCH_FRIEND,
+    payload: name,
+  };
+};
+
 export const all_Friends = () => {
   return { type: ActionType.ALL_FRIENDS };
 };

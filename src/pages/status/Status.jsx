@@ -1,22 +1,23 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { showStatusDialog } from "../../redux/actions";
+import Slider from "../../components/others/slider";
 import "./status.css";
 
 export default function Status() {
+  const dispatch = useDispatch();
+  const statusD = useSelector((state) => state.settings.showStatusDialog);
+
+  const handleClick = () => dispatch(showStatusDialog(false));
+
   return (
-    <div className="ImgCont">
-      <div className="closeUser">&times;</div>
+    <div className={`ImgCont ${!statusD ? "show" : ""}`}>
+      <div className="closeUser closeStatus" onClick={handleClick}>
+        <span className="closeStatusClo">&times;</span>
+      </div>
       <div className="imgCont">
-        <img
-          className="statusImages"
-          src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=676&q=80"
-          alt=""
-        />
-        <div className="caption">
-        text about the image
-        text about the image
-        text about the image
-        text about the image
-        </div>
+        <Slider images={null} status={true} />
       </div>
     </div>
   );

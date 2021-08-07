@@ -12,9 +12,24 @@ import {
   all_Friends,
   active_Users,
   user_Left,
+  search_User,
+  search_Friend,
 } from "./userActions";
 
-import { user_Group, current_Group, create_Group } from "./groupActions";
+import {
+  user_Group,
+  current_Group,
+  create_Group,
+  active_Groups,
+  group_Members,
+  group_Members_Local,
+  send_Group_Message,
+  my_Current_Group_Chat,
+  get_Group_Message,
+  receive_Group_Message_Socket,
+  send_Group_Message_Socket,
+} from "./groupActions";
+
 import {
   show_User_Dialog,
   show_Settings_Dialog,
@@ -24,6 +39,7 @@ import {
   set_count,
   show_Group_Dialog,
   connect_To_Socket,
+  show_Status_Dialog,
 } from "./settingsAction";
 
 import {
@@ -71,3 +87,14 @@ export const receivedMessage = received_Message;
 export const activeUsers = active_Users;
 export const userLeft = user_Left;
 export const localSeen = local_Seen;
+export const showStatusDialog = show_Status_Dialog;
+export const searchForUser = search_User;
+export const searchForFriend = search_Friend;
+export const activeGroups = active_Groups;
+export const groupMembers = group_Members;
+export const groupMembersLocal = group_Members_Local;
+export const sendGroupMessage = send_Group_Message;
+export const myCurrentGroupChat = my_Current_Group_Chat;
+export const getGroupMessage = get_Group_Message;
+export const receiveGroupMessageSocket = receive_Group_Message_Socket;
+export const sendGroupMessageSocket = send_Group_Message_Socket;

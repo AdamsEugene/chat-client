@@ -30,7 +30,7 @@ export default function Status() {
           ))()
         ) : (
           <div className="homeLeftText" style={{ textAlign: "center" }}>
-            Uplad status to display here
+            Upload status to display here
           </div>
         )}
       </ScrollToBottom>

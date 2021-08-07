@@ -2,7 +2,7 @@ import React from "react";
 import { format } from "timeago.js";
 
 export default function ByAdmin({ message, key }) {
-  console.log(message.createdAt)
+
   return (
     <div>
       <div className={`messageList admin `} key={key}>

@@ -7,6 +7,7 @@ import Popup from "../others/popup";
 export default function Userinfor({ children }) {
   const currentUser = useSelector((state) => state.users.currentUser);
   const myData = useSelector((state) => state.users.myData);
+  const currentGroup = useSelector((state) => state.groups.currentGroup);
 
   const status = ["actives", "away", "busy"];
   // const nodes = document.querySelectorAll(".needs-tobe-rendered");
@@ -15,11 +16,16 @@ export default function Userinfor({ children }) {
   // timeago.render(nodes, "zh_CN");
 
   // cancel all real-time render task
-  // timeago.cancel();
+  // timeago.cancel(); "https://www.irishrsa.ie/wp-content/uploads/2017/03/default-avatar.png"
   return (
     <div className="userInfoX">
       <div className="homeLeftHeader">
-        <h3 className="homeLeftText">User details</h3>
+        <h3 className="homeLeftText">
+          {currentUser && Object.keys(currentUser).length !== 0 && `User Info`}
+          {currentGroup &&
+            Object.keys(currentGroup).length !== 0 &&
+            `Group Info`}
+        </h3>
         <img
           className="userDImg"
           src={
@@ -27,6 +33,8 @@ export default function Userinfor({ children }) {
             Object.keys(currentUser).length !== 0 &&
             currentUser.profilePics.length !== 0
               ? `data:${currentUser.profilePics[0].contentType};base64,${currentUser.profilePics[0].image}`
+              : currentGroup && currentGroup.groupPics
+              ? `data:${currentGroup.groupPics.contentType};base64,${currentGroup.groupPics.image}`
               : "https://www.irishrsa.ie/wp-content/uploads/2017/03/default-avatar.png"
           }
           alt="U"
@@ -34,7 +42,12 @@ export default function Userinfor({ children }) {
         <div className="userInfo">
           <div className="homeLeftUserCMC">
             <div className="lastSeen">
-              last Seen : {timeago.format(Date.now())}
+              {currentUser &&
+                Object.keys(currentUser).length !== 0 &&
+                `last Seen : ${timeago.format(currentUser.createdAt)}`}
+              {currentGroup &&
+                Object.keys(currentGroup).length !== 0 &&
+                `Created at : ${timeago.format(currentGroup.createdAt)}`}
             </div>
             {currentUser && Object.keys(currentUser).length !== 0 ? (
               <Popup
@@ -52,14 +65,22 @@ export default function Userinfor({ children }) {
             )}
           </div>
           <div className="homeLeftUserCMC">
-            <div className="lastSeen">Status : {status[0]}</div>
+            <div className="lastSeen">
+              {currentUser &&
+                Object.keys(currentUser).length !== 0 &&
+                ` Status : ${status[currentUser && currentUser.status]}`}
+            </div>
             {currentUser && myData.blockList.includes(currentUser._id) ? (
               <div className={`lastSeen block `}>blocked</div>
             ) : (
               ""
             )}
           </div>
-          <div className="lastSeen">Number: +233 900 300 3456</div>
+          <div className="lastSeen">
+            {currentUser &&
+              Object.keys(currentUser).length !== 0 &&
+              `Number: +233 900 300 3456`}
+          </div>
         </div>
         {children}
       </div>

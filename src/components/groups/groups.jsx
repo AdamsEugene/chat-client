@@ -6,7 +6,16 @@ import AddCircle from "@material-ui/icons/AddCircle";
 
 import Popup from "../others/popup";
 
-import { userGroup, currentGroup, showGroupDialog } from "../../redux/actions";
+import {
+  userGroup,
+  currentGroup,
+  showGroupDialog,
+  currentUser,
+  activeGroups,
+  groupMembers,
+  groupMembersLocal,
+  getGroupMessage,
+} from "../../redux/actions";
 
 const ROOT_CSS = css({
   height: "69vh",
@@ -18,6 +27,7 @@ export default function Groups() {
   const dispatch = useDispatch();
   const myData = useSelector((state) => state.users.myData);
   const groups = useSelector((state) => state.groups.groups);
+  const active_Groups = useSelector((state) => state.groups.activeGroups);
 
   const [activeUser, setActiveUser] = useState();
 
@@ -29,6 +39,13 @@ export default function Groups() {
   const setActive = (id) => {
     setActiveUser(id);
     dispatch(currentGroup(id));
+    dispatch(activeGroups(id));
+    if (!active_Groups.includes(id)) {
+      dispatch(groupMembers(myData.accessToken, id));
+      dispatch(getGroupMessage(myData.accessToken, id));
+    }
+    dispatch(currentUser(45));
+    dispatch(groupMembersLocal(id));
   };
 
   const handleGreateGroup = () => dispatch(showGroupDialog(true));
@@ -48,7 +65,11 @@ export default function Groups() {
               <div className="offline">
                 <img
                   className="homeLeftUserAvatal"
-                  src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=676&q=80"
+                  src={
+                    group.groupPics
+                      ? `data:${group.groupPics.contentType};base64,${group.groupPics.image}`
+                      : "https://www.irishrsa.ie/wp-content/uploads/2017/03/default-avatar.png"
+                  }
                   alt="N"
                 />
               </div>
@@ -60,9 +81,11 @@ export default function Groups() {
                       {group.dics}
                     </div>
                   </div>
-                  <Popup user={false} classs={true} id={group._id} />
                 </div>
                 <div className="homeLeftUserCMC"></div>
+              </div>
+              <div className="groupMoreCont">
+                <Popup user={false} classs={true} id={group._id} />
               </div>
             </div>
           ))

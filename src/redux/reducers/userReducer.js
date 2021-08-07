@@ -6,7 +6,9 @@ const initialState = {
   currentUser: {},
   friends: [],
   error: 0,
-  activeUsers: [],
+  activeUsers: ["none"],
+  searchResults: [],
+  searchFriends: [],
 };
 
 export const userRrducer = (state = initialState, action) => {
@@ -53,7 +55,28 @@ export const userRrducer = (state = initialState, action) => {
     case ActionType.CURRENT_USER:
       return {
         ...state,
-        currentUser: state.users.find((user) => user._id === action.payload),
+        currentUser:
+          state.users.find((user) => user._id === action.payload) || {},
+      };
+
+    case ActionType.SEARCH_USER:
+      return {
+        ...state,
+        searchResults:
+          state.users &&
+          state.users.filter((user) =>
+            user.name.toLowerCase().includes(action.payload.toLowerCase())
+          ),
+      };
+
+    case ActionType.SEARCH_FRIEND:
+      return {
+        ...state,
+        searchFriends:
+          state.friends &&
+          state.friends.filter((user) =>
+            user.name.toLowerCase().includes(action.payload.toLowerCase())
+          ),
       };
 
     case ActionType.FETCH_ALL_FRIENDS:

@@ -22,6 +22,14 @@ export const show_Group_Dialog = (status) => {
   };
 };
 
+export const show_Status_Dialog = (status) => {
+  return {
+    type: ActionType.STATUS_DIALOG,
+    payload: status,
+  };
+};
+
+
 export const settings_Background = (accessToken, image) => async (dispatch) => {
   try {
     const groups = await instance(accessToken).post(`/api/settings`, image);

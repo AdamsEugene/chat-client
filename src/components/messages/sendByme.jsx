@@ -16,6 +16,7 @@ export default function SendByme({ message, key, count }) {
   const user = useSelector((state) => state.users.myData);
   const socket = useSelector((state) => state.settings.socket);
   const activeUsers = useSelector((state) => state.users.activeUsers);
+  const current_User = useSelector((state) => state.users.currentUser);
 
   const [seens, setSeens] = useState([]);
 
@@ -26,8 +27,25 @@ export default function SendByme({ message, key, count }) {
   }, [socket]);
 
   const rangeOutput = !message.seen
-    ? range(new Date(message.createdAt).getTime() - 50, 50, 1)
+    ? range(new Date(message.createdAt).getTime(), 10, 1)
     : [];
+
+  // console.log(rangeOutput);
+  // console.log(seens);
+
+  if (
+    rangeOutput.some(
+      (v, i) =>
+        seens.includes(v) &&
+        !message.seen &&
+        socket.emit("i have seen", {
+          idm: user._id,
+          idu: current_User._id,
+          time: rangeOutput[i],
+        })
+    )
+  )
+    message = { ...message, seen: true };
 
   const Block = (props) => {
     // inViewport,
@@ -74,8 +92,7 @@ export default function SendByme({ message, key, count }) {
                       }
                     />
                     <div className="seen">
-                      {message.seen ||
-                      rangeOutput.some((v) => seens.includes(v)) ? (
+                      {message.seen ? (
                         <DoneAllIcon className={`checkSeen two`} />
                       ) : activeUsers.includes(message.receiver) ? (
                         <DoneAllIcon className={`checkSeen two default`} />

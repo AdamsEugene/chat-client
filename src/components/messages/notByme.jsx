@@ -13,12 +13,12 @@ export default function NotByme({ message, key }) {
   const user = useSelector((state) => state.users.myData);
   const socket = useSelector((state) => state.settings.socket);
 
-
   const Block = (props) => {
     const { forwardedRef } = props;
 
     return (
       <div ref={forwardedRef}>
+        {true ? "" : ""}
         {!user.blockList.includes(message.sender) ? (
           !message.deleteFromAll ? (
             !message.deleteFromMe.receiver ? (
@@ -97,7 +97,7 @@ export default function NotByme({ message, key }) {
 
   return (
     <ViewportBlock
-      onEnterViewport={() =>
+      onEnterViewport={() => 
         message._id
           ? !message.seen
             ? dispatch(setSeen(user.accessToken, message._id))

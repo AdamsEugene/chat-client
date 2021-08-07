@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { sendMessage } from "../../redux/actions";
+import { sendMessage, sendGroupMessage } from "../../redux/actions";
 import SendIcon from "@material-ui/icons/Send";
 import AttachmentIcon from "@material-ui/icons/Attachment";
 import CameraAltIcon from "@material-ui/icons/CameraAlt";
@@ -11,31 +11,49 @@ export default function TextInput() {
   const user = useSelector((state) => state.users.myData);
   const currentUser = useSelector((state) => state.users.currentUser);
   const socket = useSelector((state) => state.settings.socket);
+  const currentGroup = useSelector((state) => state.groups.currentGroup);
 
   const [message, setMessage] = useState();
+  const [check, setCheck] = useState(true);
 
   const handleInputChange = (e) => {
     setMessage(e.target.value);
   };
 
   let typing = false;
-  let timeout = undefined;
 
   const timeOut = () => {
     typing = false;
-    socket.emit("not typing", user._id);
-    console.log("not typing");
+    setCheck(true);
+    currentUser &&
+      Object.keys(currentUser).length !== 0 &&
+      check &&
+      socket.emit("not typing", user._id);
+
+    check &&
+      currentGroup &&
+      Object.keys(currentGroup).length !== 0 &&
+      socket.emit("not typing group", currentGroup.name);
   };
 
   const handleIsTyping = (e) => {
     if (!typing) {
       typing = true;
-      console.log("is typing");
-      socket.emit("is typing", user._id);
-      timeout = setTimeout(timeOut, 5000);
-    } else {
-      clearTimeout(timeout);
-      timeout = setTimeout(timeOut, 5000);
+      currentUser &&
+        Object.keys(currentUser).length !== 0 &&
+        check &&
+        socket.emit("is typing", user._id);
+
+      currentGroup &&
+        check &&
+        Object.keys(currentGroup).length !== 0 &&
+        socket.emit("is typing group", {
+          groupName: currentGroup.name,
+          userName: user.name,
+        });
+
+      setCheck(false);
+      setTimeout(timeOut, 5000);
     }
   };
 
@@ -45,21 +63,50 @@ export default function TextInput() {
       let data = {};
       data.message = message;
       data.sender = user._id;
-      data.receiver = currentUser._id;
-      dispatch(sendMessage(user.accessToken, data));
-      setMessage("");
+      if (currentUser && Object.keys(currentUser).length !== 0)
+        data.receiver = currentUser._id;
+      if (currentGroup && Object.keys(currentGroup).length !== 0)
+        data.groupId = currentGroup._id;
+      data.createdAt = Date.now();
+      currentUser &&
+        Object.keys(currentUser).length !== 0 &&
+        dispatch(sendMessage(user.accessToken, data));
+
+      currentGroup &&
+        Object.keys(currentGroup).length !== 0 &&
+        dispatch(sendGroupMessage(user.accessToken, data));
+
       let socketMsgData = {
         sender: user._id,
-        receiver: currentUser?._id,
+        receiver:
+          currentUser && Object.keys(currentUser).length !== 0
+            ? currentUser?._id
+            : currentGroup.name,
         message,
         shareWith: [],
         seen: false,
         deleteFromMe: { sender: false, receiver: false },
         deleteFromAll: false,
         createdAt: Date.now(),
+        groupId: currentGroup?._id,
       };
-      socket.emit("sendMessage", socketMsgData);
-      // dispatch(ourChat(user._id, currentUser ? currentUser._id : ""));
+      currentUser &&
+        Object.keys(currentUser).length !== 0 &&
+        socket.emit("sendMessage", socketMsgData);
+      // groupId
+      currentGroup &&
+        Object.keys(currentGroup).length !== 0 &&
+        socket.emit("send GroupM essage", socketMsgData);
+
+      currentUser &&
+        Object.keys(currentUser).length !== 0 &&
+        socket.emit("not typing", user._id);
+
+      currentGroup &&
+        Object.keys(currentGroup).length !== 0 &&
+        socket.emit("not typing group", currentGroup.name);
+
+      setMessage("");
     }
   };
 

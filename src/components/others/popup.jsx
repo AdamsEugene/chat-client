@@ -1,11 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  addFriend,
-  blockUser,
-  deleteFromMe,
-} from "../../redux/actions";
+import { addFriend, blockUser, deleteFromMe } from "../../redux/actions";
 
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -48,7 +44,7 @@ export default function Popup({ user, classs, id, purpose, block, data }) {
   };
 
   return (
-    <div className={user ? "" : classs ? "groupic" : "more"}>
+    <div className={user ? "" : classs ? "more groupic" : "more"}> 
       <MoreHorizIcon className="moreIcon" onClick={handleClick} />
       <Menu
         id="simple-menu"
@@ -61,6 +57,9 @@ export default function Popup({ user, classs, id, purpose, block, data }) {
           <>
             <MenuItem onClick={() => handleClose(id, "addfriend")}>
               {purpose === "all" ? "Add as friend" : "Unfriend user"}
+            </MenuItem>
+            <MenuItem onClick={() => handleClose(id, "addtogroup")}>
+              Add to group
             </MenuItem>
             {purpose !== "all" ? (
               <>

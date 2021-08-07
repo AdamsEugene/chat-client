@@ -9,17 +9,20 @@ export default function Group() {
   const dispatch = useDispatch();
   const dialog = useSelector((state) => state.settings.showGroupsDialog);
   const me = useSelector((state) => state.users.myData);
+  const socket = useSelector((state) => state.settings.socket);
 
   const [image, setImage] = useState();
   const [load, setLoad] = useState(false);
   const [name, setName] = useState("");
   const [disc, setDisc] = useState();
+  const [uploadImd, setUploadImd] = useState();
   const [members, setMembers] = useState([]);
 
   const handleClick = () => dispatch(showGroupDialog(false));
 
   const handleFileChange = (e) => {
     if (e.target.files[0]) setLoad(true);
+    if (e.target.files[0]) setUploadImd(e.target.files[0]);
     if (e.target.files[0]) setImage(URL.createObjectURL(e.target.files[0]));
   };
 
@@ -28,14 +31,19 @@ export default function Group() {
   const createGroup = () => {
     if (name !== "") {
       const allMem = [...members, me._id];
-      const data = {};
-      data.name = name;
-      if (disc) data.dics = disc;
-      if (members.length > 0) data.members = allMem;
-      data.admins = [me._id];
-      if (image) data.groupPics = image;
+      const data = new FormData();
+      data.append("name", name);
+      if (disc) data.append("dics", disc);
+      allMem.forEach((member) => {
+        data.append("members", member);
+      });
+      // if (members.length > 0) data.append("members", members);
+      data.append("admins", [me._id]);
+      if (image) data.append("groupPics", uploadImd);
       dispatch(createNewGroup(me.accessToken, data));
+      socket.emit("join group", name);
     }
+    handleClick();
   };
 
   return (

@@ -5,6 +5,7 @@ const initialState = {
   showUserDialog: false,
   showSettingsDialog: false,
   showGroupsDialog: false,
+  showStatusDialog: false,
   backgroundImage: "",
   count: 0,
   socket: null,
@@ -20,6 +21,9 @@ export const settingsReducer = (state = initialState, action) => {
 
     case ActionType.GROUP_DIALOG:
       return { ...state, showGroupsDialog: action.payload };
+
+    case ActionType.STATUS_DIALOG:
+      return { ...state, showStatusDialog: action.payload };
 
     case ActionType.SETTINGS_BACK_GROUND:
       return { ...state, backgroundImage: action.payload };
