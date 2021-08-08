@@ -52,8 +52,9 @@
   color: #ddd;
 }
 
-.RegisterRightContainer {
-  flex: 1;
+.RegisterRightContainerR {
+  flex: 1.2;
+  margin-top: 20px;
 }
 
 .RegisterRight {
@@ -66,7 +67,7 @@
   align-items: center;
 }
 
-.Imgcont{
+.Imgcont {
   position: relative;
 }
 
@@ -82,7 +83,7 @@
   /* align-self: center; */
 }
 
-.RegisterRightImage.ontop{
+.RegisterRightImage.ontop {
   position: absolute;
   top: 0;
   right: 0;
@@ -119,7 +120,7 @@
 .submitForm {
   display: flex;
   justify-content: center;
-  width: 40%;
+  width: 80%;
   height: 40px;
   border: none;
   color: #bbb;
@@ -127,13 +128,20 @@
   font-size: 20px;
   margin-top: 15px;
   cursor: pointer;
+  transition: all 0.5s;
+  border-radius: 2px;
 }
 
-.btncontent{
+.submitForm:hover {
+  background-color: #888;
+  color: #fff;
+}
+
+.btncontent {
   margin-top: 8px;
 }
 
-.regSpinner{
+.regSpinner {
   margin-top: 8px;
   margin-left: 20px;
 }
@@ -152,18 +160,18 @@
   margin-bottom: 0;
 }
 
-.RegisterLogin:hover{
+.RegisterLogin:hover {
   text-decoration: underline;
   color: #eee;
 }
 
-.RegisterCondi{
-    color: #bbb;
+.RegisterCondi {
+  color: #bbb;
   font-weight: 400;
   font-size: 12px;
 }
 
-.errorIcon{
+.errorIcon {
   color: red;
   margin-left: 15px;
   margin-top: 7px;

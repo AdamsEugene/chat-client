@@ -129,7 +129,7 @@ export default function Friends() {
                 <img
                   className="homeLeftUserAvatal"
                   src={
-                    friend.profilePics.length !== 0
+                    friend.profilePics && friend.profilePics.length !== 0
                       ? `data:${friend.profilePics[0].contentType};base64,${friend.profilePics[0].image}`
                       : "https://www.irishrsa.ie/wp-content/uploads/2017/03/default-avatar.png"
                   }

@@ -7,6 +7,7 @@ import Spinner from "../../components/others/spinner";
 import "./register.css";
 
 import { register, clearError } from "../../redux/actions";
+import RegisterGoogle from "../../components/google/Register";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -52,22 +53,8 @@ export default function Register() {
       {/* <div className="RegisterContainerImage"></div> */}
       <div className="RegisterContainer">
         <div className="RegisterInnerContainer">
-          <div className="RegisterLeftContainer">
-            <div className="RegisterLeftTextContainer">
-              <div className="RegisterLeftText">
-                <img
-                  className="RegisterRightImage"
-                  src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=676&q=80"
-                  alt=""
-                />
-                <span className="RegisterLeftTextH1">
-                  <h1 className="RegisterLeftH1">Instant Chat App</h1>
-                </span>
-                <span className="RegisterLeftdisc">Chat with anyone</span>
-              </div>
-            </div>
-          </div>
-          <div className="RegisterRightContainer">
+          <div className="RegisterLeftContainer"></div>
+          <div className="RegisterRightContainerR">
             <div className="RegisterRight">
               <form
                 className="RegisterRightImageCont"
@@ -124,6 +111,8 @@ export default function Register() {
                     )
                   ) : null}
                 </button>
+                <span className="or">or</span>
+                <RegisterGoogle />
                 <div className="RegisterInfo">
                   <Link to="/login" className="RegisterLogin">
                     already have an account login instead
@@ -141,6 +130,7 @@ export default function Register() {
               </form>
             </div>
           </div>
+          <div className="RegisterLeftContainer"></div>
         </div>
       </div>
     </>

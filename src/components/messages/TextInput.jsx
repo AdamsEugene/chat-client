@@ -68,6 +68,7 @@ export default function TextInput() {
       if (currentGroup && Object.keys(currentGroup).length !== 0)
         data.groupId = currentGroup._id;
       data.createdAt = Date.now();
+      data.name = user?.name;
       currentUser &&
         Object.keys(currentUser).length !== 0 &&
         dispatch(sendMessage(user.accessToken, data));
