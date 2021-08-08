@@ -11,7 +11,7 @@ import DoneAllIcon from "@material-ui/icons/DoneAll";
 import Popup from "../others/popup";
 import DeletedMnot from "./deletedMgs";
 
-export default function SendByme({ message, key, count }) {
+export default function SendByme({ message }) {
   // const dispatch = useDispatch();
   const user = useSelector((state) => state.users.myData);
   const socket = useSelector((state) => state.settings.socket);
@@ -64,7 +64,6 @@ export default function SendByme({ message, key, count }) {
                     ? "notStart"
                     : ""
                 } `}
-                key={key}
               >
                 <div className="msgbody">
                   <div

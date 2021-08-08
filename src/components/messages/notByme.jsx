@@ -7,11 +7,12 @@ import { setSeen } from "../../redux/actions";
 import Popup from "../others/popup";
 import DeletedMnot from "./deletedMgs";
 
-export default function NotByme({ message, key }) {
+export default function NotByme({ message }) {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.users.currentUser);
   const user = useSelector((state) => state.users.myData);
   const socket = useSelector((state) => state.settings.socket);
+  const currentGroup = useSelector((state) => state.groups.currentGroup);
 
   const Block = (props) => {
     const { forwardedRef } = props;
@@ -30,7 +31,6 @@ export default function NotByme({ message, key }) {
                     ? "notStart"
                     : ""
                 } `}
-                key={key}
               >
                 {message.group && !message.start ? (
                   <div className="messageAvatal me"></div>
@@ -54,7 +54,15 @@ export default function NotByme({ message, key }) {
                     }`}
                   >
                     <span className="messageTime">
-                      {format(message.createdAt)}
+                      {format(message.createdAt)}{" "}
+                      {currentGroup &&
+                        Object.keys(currentGroup).length !== 0 && (
+                          <span className="messageName">
+                            {((message.group && message.start) ||
+                              (!message.group && !message.start)) &&
+                              message.name?.split(" ")[0]}
+                          </span>
+                        )}
                     </span>
                   </div>
                   <div className="messageDetails">
@@ -97,7 +105,7 @@ export default function NotByme({ message, key }) {
 
   return (
     <ViewportBlock
-      onEnterViewport={() => 
+      onEnterViewport={() =>
         message._id
           ? !message.seen
             ? dispatch(setSeen(user.accessToken, message._id))

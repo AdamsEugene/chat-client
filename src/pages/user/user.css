@@ -33,6 +33,17 @@
   color: #888;
 }
 
+.userL.logout {
+  color: rgb(185, 80, 80);
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.userL.logout:hover {
+  text-decoration: underline;
+  color: red;
+}
+
 .userR {
   justify-content: center;
   /* padding: 0 5px 5px 0; */

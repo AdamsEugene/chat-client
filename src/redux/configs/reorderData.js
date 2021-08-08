@@ -1,5 +1,4 @@
 export const reorder = (data) => {
-  console.log(data);
   let x = 1;
   let g = 0;
   let container = [];

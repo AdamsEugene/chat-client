@@ -25,7 +25,7 @@ export default function AllUsers() {
   const [name, setName] = useState("");
 
   useEffect(() => {
-    if (Object.keys(myData).length !== 0 && !users)
+    if (Object.keys(myData).length !== 0 && (!users || users.length === 0))
       dispatch(allUsers(myData.accessToken));
   }, [dispatch, users, myData]);
 
@@ -47,9 +47,10 @@ export default function AllUsers() {
       <h3 className="homeLeftText">New Users</h3>
       <ScrollToBottom className={ROOT_CSS} mode="top">
         {searchResults && searchResults?.length !== 0 && name !== "" ? (
-          searchResults.map((user) =>
+          searchResults.map((user, i) =>
             user._id !== myData._id && !myData.friends.includes(user._id) ? (
               <div
+                key={i}
                 className={`homeLeftUserList ${
                   activeUser === user._id ? "active" : ""
                 } `}
@@ -98,9 +99,10 @@ export default function AllUsers() {
             no user found!!!
           </h5>
         ) : users ? (
-          users.map((user) =>
+          users.map((user, i) =>
             user._id !== myData._id && !myData.friends.includes(user._id) ? (
               <div
+                key={i}
                 className={`homeLeftUserList ${
                   activeUser === user._id ? "active" : ""
                 } `}

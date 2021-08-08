@@ -168,6 +168,12 @@
   font-size: 12px;
 }
 
+.messageName{
+  font-weight: 400;
+  font-size: 12px;
+  color: rgb(240, 116, 186);
+}
+
 .messageTime.admin {
   font-size: 12px;
   font-weight: 500;

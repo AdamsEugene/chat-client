@@ -120,3 +120,7 @@ export const block_user = (accessToken, id) => async (dispatch) => {
 export const clear_Error = () => {
   return { type: ActionType.CLEAR_ERROR };
 };
+
+export const Logout = () => {
+  return { type: ActionType.LOGOUT };
+};

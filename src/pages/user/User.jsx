@@ -8,6 +8,7 @@ import {
   showUserDialog,
   updateUser,
   updateUserProfilePic,
+  logout,
 } from "../../redux/actions";
 
 import Slider from "../../components/others/imageSlider";
@@ -53,7 +54,7 @@ export default function User() {
       let data = new FormData();
       pics.forEach((pic) => {
         data.append("image", pic);
-        alert("not support yet")
+        alert("not support yet");
       });
     }
     if (pic !== "") {
@@ -83,11 +84,19 @@ export default function User() {
     }
     handleClick();
   };
+
+  const handleLogOut = () => {
+    localStorage.removeItem("myData");
+    dispatch(logout());
+  };
   // console.log(name, user.name, user.accessToken);
   return (
     <div className={`userCont ${settings ? "" : " visible"}`}>
       <div className="userHeader">
         <div className="userL">Update Profile</div>
+        <div className="userL logout" onClick={handleLogOut}>
+          Logout
+        </div>
         <div className="userR">
           <div className="closeUser" onClick={handleClick}>
             &times;

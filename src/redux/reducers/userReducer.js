@@ -2,7 +2,7 @@ import { ActionType } from "../configs/actionType";
 
 const initialState = {
   users: [],
-  myData: {},
+  myData: JSON.parse(localStorage.getItem("myData")) || {},
   currentUser: {},
   friends: [],
   error: 0,
@@ -21,6 +21,9 @@ export const userRrducer = (state = initialState, action) => {
 
     case ActionType.REGISTERING_FAILURE:
       return { state, error: action.payload };
+
+    case ActionType.LOGOUT:
+      return { state, myData: {} };
 
     case ActionType.CLEAR_ERROR:
       return { state, error: 0 };

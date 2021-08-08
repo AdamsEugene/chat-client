@@ -26,6 +26,7 @@ export default function Login() {
         setEmail(user.email);
 
         if (user.accessToken) {
+          localStorage.setItem("myData", JSON.stringify(user));
           history.push("/");
         } else {
           history.push("/login");

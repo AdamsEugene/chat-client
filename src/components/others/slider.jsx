@@ -4,7 +4,7 @@ export default function Slider({ images, status }) {
   let allImages = images?.map((image) => {
     return image && { url: URL.createObjectURL(image) };
   });
-  console.log(allImages, "  uu ");
+ 
   if (!allImages) allImages = [{}];
   return (
     <div style={{ position: "relative" }}>

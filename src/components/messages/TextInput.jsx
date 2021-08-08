@@ -89,6 +89,7 @@ export default function TextInput() {
         deleteFromAll: false,
         createdAt: Date.now(),
         groupId: currentGroup?._id,
+        name: user?.name,
       };
       currentUser &&
         Object.keys(currentUser).length !== 0 &&

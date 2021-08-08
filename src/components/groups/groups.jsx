@@ -55,8 +55,9 @@ export default function Groups() {
       <h3 className="homeLeftText">Groups</h3>
       <ScrollToBottom className={ROOT_CSS} mode="top">
         {groups ? (
-          groups.map((group) => (
+          groups.map((group, i) => (
             <div
+            key={i}
               className={`homeLeftUserList ${
                 activeUser === group._id ? "active" : ""
               } `}

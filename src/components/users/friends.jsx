@@ -30,7 +30,7 @@ export default function Friends() {
   const [typing, setTyping] = useState([]);
 
   useEffect(() => {
-    if (Object.keys(myData).length !== 0 && !friends)
+    if (Object.keys(myData).length !== 0 && (!friends || friends.length === 0))
       dispatch(userFriends(myData.accessToken));
   }, [dispatch, myData, friends]);
 
@@ -57,8 +57,6 @@ export default function Friends() {
       setTyping(typing);
     });
   });
-
-  console.log(typing);
 
   return (
     <div>

@@ -54,7 +54,7 @@ export default function Popup({ user, classs, id, purpose, block, data }) {
         onClose={handleClose}
       >
         {user ? (
-          <>
+          <div>
             <MenuItem onClick={() => handleClose(id, "addfriend")}>
               {purpose === "all" ? "Add as friend" : "Unfriend user"}
             </MenuItem>
@@ -62,7 +62,7 @@ export default function Popup({ user, classs, id, purpose, block, data }) {
               Add to group
             </MenuItem>
             {purpose !== "all" ? (
-              <>
+              <div>
                 <MenuItem onClick={() => handleClose(id, "makeadmin")}>
                   Make admin
                 </MenuItem>
@@ -72,13 +72,13 @@ export default function Popup({ user, classs, id, purpose, block, data }) {
                 <MenuItem onClick={() => handleClose(id, "blockuser")}>
                   {block === "block" ? "Unblock user" : "Block user"}
                 </MenuItem>
-              </>
+              </div>
             ) : (
               ""
             )}
-          </>
+          </div>
         ) : classs ? (
-          <>
+          <div>
             <MenuItem onClick={() => handleClose(id, "joingroup")}>
               Join group
             </MenuItem>
@@ -91,9 +91,9 @@ export default function Popup({ user, classs, id, purpose, block, data }) {
             <MenuItem onClick={() => handleClose(id, "exitgroup")}>
               Exit group
             </MenuItem>
-          </>
+          </div>
         ) : (
-          <>
+          <div>
             <MenuItem onClick={() => handleClose(id, "share")}>Share</MenuItem>
             <MenuItem onClick={() => handleClose(id, "delfromme", data)}>
               Delete from me
@@ -101,7 +101,7 @@ export default function Popup({ user, classs, id, purpose, block, data }) {
             <MenuItem onClick={() => handleClose(id, "delfromall")}>
               Delete from all
             </MenuItem>
-          </>
+          </div>
         )}
       </Menu>
     </div>

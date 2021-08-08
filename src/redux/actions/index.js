@@ -14,6 +14,7 @@ import {
   user_Left,
   search_User,
   search_Friend,
+  Logout,
 } from "./userActions";
 
 import {
@@ -98,3 +99,4 @@ export const myCurrentGroupChat = my_Current_Group_Chat;
 export const getGroupMessage = get_Group_Message;
 export const receiveGroupMessageSocket = receive_Group_Message_Socket;
 export const sendGroupMessageSocket = send_Group_Message_Socket;
+export const logout = Logout;
