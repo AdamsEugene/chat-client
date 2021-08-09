@@ -68,7 +68,7 @@ export const userRrducer = (state = initialState, action) => {
         searchResults:
           state.users &&
           state.users.filter((user) =>
-            user.name.toLowerCase().includes(action.payload.toLowerCase())
+            user?.name?.toLowerCase().includes(action.payload.toLowerCase())
           ),
       };
 
@@ -78,7 +78,7 @@ export const userRrducer = (state = initialState, action) => {
         searchFriends:
           state.friends &&
           state.friends.filter((user) =>
-            user.name.toLowerCase().includes(action.payload.toLowerCase())
+            user?.name?.toLowerCase().includes(action.payload.toLowerCase())
           ),
       };
 

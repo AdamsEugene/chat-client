@@ -5,7 +5,7 @@ export const registerUser = (data) => async (dispatch) => {
   dispatch({ type: ActionType.REGISTERING });
   try {
     const user = await instance().post("/api/auth/register", data);
-    console.log(user);
+
     dispatch({ type: ActionType.REGISTERING_SUCCESS, payload: user.data });
   } catch (_err) {
     dispatch({ type: ActionType.REGISTERING_FAILURE, payload: 500 });
@@ -50,7 +50,6 @@ export const update_User_Profile_Pic =
         `/api/users/profilepic/${userId}`,
         data
       );
-      console.log(user.data);
       dispatch({
         type: ActionType.UPDATE_USER_PROFILE_PIC,
         payload: user.data,

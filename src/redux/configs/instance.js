@@ -2,11 +2,11 @@ import axios from "axios";
 
 export const instance = (accessToken) => {
   return axios.create({
-    baseURL: "http://localhost:9000/",
+    baseURL: "https://chat-apa.herokuapp.com/",
     // timeout: 1000,
     withCredentials: false,
     headers: {
-      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Origin": "https://chat-apa.herokuapp.com/",
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       token: accessToken ? "bearer " + accessToken : "bearer token",
     },
