@@ -19,13 +19,13 @@ export default function Typing({ memberName, group }) {
                 {currentGroup && Object.keys(currentGroup).length !== 0 && (
                   <p className="p">{`${
                     memberName && memberName.split(" ")[0]
-                  } is typing`}</p>
+                  }`}</p>
                 )}
                 {currentUser && Object.keys(currentUser).length !== 0 && (
                   <p className="p">typing</p>
                 )}
                 <p className="p">
-                  <Dot group={group} />
+                  <Dot />
                 </p>
               </div>
             </div>

@@ -79,7 +79,7 @@ export default function Appbar() {
                     if (i < 4) {
                       return (
                         <p className="names" key={i}>
-                          {member._id === user._id ? "You" : member.name},
+                          {member._id === user._id ? "You" : member?.name.split(" ")[0]},
                         </p>
                       );
                     } else return null;
