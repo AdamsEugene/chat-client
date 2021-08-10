@@ -38,7 +38,7 @@ export const settingsReducer = (state = initialState, action) => {
       return {
         ...state,
         socket: io("https://chat-socket-apa.herokuapp.com/", {
-          withCredentials: true,
+          transport: ["websocket"],
         }),
       };
 
