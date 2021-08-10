@@ -39,13 +39,6 @@ export const settingsReducer = (state = initialState, action) => {
         ...state,
         socket: io("https://chat-socket-apa.herokuapp.com/", {
           withCredentials: true,
-          transportOptions: {
-            polling: {
-              extraHeaders: {
-                "my-custom-header": "abcd",
-              },
-            },
-          },
         }),
       };
 
