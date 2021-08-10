@@ -105,7 +105,7 @@ export default function Login() {
                 <LoginGoogle />
                 <div className="RegisterInfo">
                   <Link to="/register" className="RegisterLogin">
-                    don't have an account login instead
+                    don't have an account register instead
                   </Link>
                   <p className="RegisterCondi">terms and conditions</p>
                 </div>
