@@ -104,9 +104,10 @@ export default function Login() {
                 <span className="or">or</span>
                 <LoginGoogle />
                 <div className="RegisterInfo">
-                  <Link to="/register" className="RegisterLogin">
-                    don't have an account register instead
+                  <Link to="/register" className="submitForm btn">
+                    Register
                   </Link>
+
                   <p className="RegisterCondi">terms and conditions</p>
                 </div>
               </form>

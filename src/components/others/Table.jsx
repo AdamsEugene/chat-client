@@ -44,7 +44,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected, deleteMembers } = props;
+  const { numSelected, deleteMembers, create } = props;
 
   return (
     <Toolbar
@@ -68,7 +68,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          Add members
+          {!create ? "All members" : "Add members"} 
         </Typography>
       )}
 
@@ -113,18 +113,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable({ tavleData }) {
+export default function EnhancedTable({ tavleData, create }) {
   // const uniqueArray = (a) =>
   //   [...new Set(a.map((o) => JSON.stringify(o)))].map((s) => JSON.parse(s));
-    
+
   const users = useSelector((state) => state.users.users);
   const me = useSelector((state) => state.users.myData);
   const currentGroup = useSelector((state) => state.groups.currentGroup);
-  const groupMembers = useSelector((state) => state.groups.members);
+  // const groupMembers = useSelector((state) => state.groups.members);
   const membersLocal = useSelector((state) => state.groups.membersLocal);
 
   let allRows;
-  if (!currentGroup && Object.keys(currentGroup).length === 0) {
+  if (!currentGroup && Object.keys(currentGroup).length === 0 && create) {
     allRows =
       users && Object.keys(users).length !== 0
         ? users.map((user) =>
@@ -140,10 +140,12 @@ export default function EnhancedTable({ tavleData }) {
       user._id !== me._id ? createData(user.name, user._id) : null
     );
   } else {
-    allRows = groupMembers.map((user) =>
+    allRows = users.map((user) =>
       user._id !== me._id ? createData(user.name, user._id) : null
     );
   }
+
+  // console.log(allRows);
 
   const rows = allRows.filter((row) => row !== null);
   const classes = useStyles();
@@ -192,6 +194,7 @@ export default function EnhancedTable({ tavleData }) {
         <EnhancedTableToolbar
           numSelected={selected.length}
           deleteMembers={deleteMembers}
+          create={create}
         />
         <TableContainer>
           <Table

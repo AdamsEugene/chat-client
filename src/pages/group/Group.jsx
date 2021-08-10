@@ -89,7 +89,7 @@ export default function Group() {
         </div>
         <div className="groupBodyRight">
           <div className="userstable">
-            <Table tavleData={(data) => tavleData(data)} />
+            <Table tavleData={(data) => tavleData(data)} create={true} />
           </div>
           <div className="done createG" onClick={createGroup}>
             Create

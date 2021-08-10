@@ -114,10 +114,10 @@ export default function Register() {
                 <span className="or">or</span>
                 <RegisterGoogle />
                 <div className="RegisterInfo">
-                  <Link to="/login" className="RegisterLogin">
-                    already have an account login instead
+                  <Link to="/login" className="submitForm btn">
+                    Login
                   </Link>
-                  <p className="RegisterCondi">terms and conditions</p>
+                  
                   <input
                     type="file"
                     id="loadImage"
