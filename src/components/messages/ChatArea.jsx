@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { css } from "@emotion/css";
 import ScrollToBottom from "react-scroll-to-bottom";
+import SyncIcon from "@material-ui/icons/Sync";
 
 import {
   refreshBackgroundImage,
@@ -16,6 +17,9 @@ import {
   myCurrentGroupChat,
   // receiveGroupMessageSocket,
   sendGroupMessageSocket,
+  userGroup,
+  allUsers,
+  userFriends,
 } from "../../redux/actions";
 
 import "./chat.css";
@@ -62,6 +66,12 @@ export default function ChatArea() {
     backgroundRepeat: "no-repeat",
     backgroundAttachment: "fixed",
   });
+
+  const refreshPage = () => {
+    dispatch(userGroup(user.accessToken));
+    dispatch(allUsers(user.accessToken));
+    dispatch(userFriends(user.accessToken));
+  };
 
   useEffect(() => {
     if (
@@ -141,7 +151,7 @@ export default function ChatArea() {
   // console.log(currentGroupChat);
 
   return (
-    <div>
+    <div className="baseCont">
       <ScrollToBottom
         className={ROOT_CSS}
         followButtonClassName="followButtonClass"
@@ -216,6 +226,11 @@ export default function ChatArea() {
           </h5>
         )}
       </ScrollToBottom>
+      <div className="refreshBtn" onClick={refreshPage}>
+        <div className="refresh">
+          <SyncIcon className="SyncIcon" />
+        </div>
+      </div>
     </div>
   );
 }

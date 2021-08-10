@@ -447,7 +447,7 @@
 
 .createGroup:hover {
   background-color: red;
-  transform: rotate(720deg) !important;
+  transform: rotate(90deg) !important;
 }
 
 .AddCircle {
