@@ -35,7 +35,12 @@ export const settingsReducer = (state = initialState, action) => {
       return { ...state, count: action.payload };
 
     case ActionType.CONNECT_SOCKET:
-      return { ...state, socket: io("https://chat-socket-apa.herokuapp.com/") };
+      return {
+        ...state,
+        socket: io("https://chat-socket-apa.herokuapp.com/", {
+          withCredentials: true,
+        }),
+      };
 
     default:
       return state;
