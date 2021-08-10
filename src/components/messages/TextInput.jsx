@@ -28,12 +28,12 @@ export default function TextInput() {
     currentUser &&
       Object.keys(currentUser).length !== 0 &&
       check &&
-      socket.emit("not typing", user._id);
+      socket?.emit("not typing", user._id);
 
     check &&
       currentGroup &&
       Object.keys(currentGroup).length !== 0 &&
-      socket.emit("not typing group", currentGroup.name);
+      socket?.emit("not typing group", currentGroup.name);
   };
 
   const handleIsTyping = (e) => {
@@ -42,12 +42,12 @@ export default function TextInput() {
       currentUser &&
         Object.keys(currentUser).length !== 0 &&
         check &&
-        socket.emit("is typing", user._id);
+        socket?.emit("is typing", user._id);
 
       currentGroup &&
         check &&
         Object.keys(currentGroup).length !== 0 &&
-        socket.emit("is typing group", {
+        socket?.emit("is typing group", {
           groupName: currentGroup.name,
           userName: user.name,
         });
@@ -94,19 +94,19 @@ export default function TextInput() {
       };
       currentUser &&
         Object.keys(currentUser).length !== 0 &&
-        socket.emit("sendMessage", socketMsgData);
+        socket?.emit("sendMessage", socketMsgData);
       // groupId
       currentGroup &&
         Object.keys(currentGroup).length !== 0 &&
-        socket.emit("send GroupM essage", socketMsgData);
+        socket?.emit("send GroupM essage", socketMsgData);
 
       currentUser &&
         Object.keys(currentUser).length !== 0 &&
-        socket.emit("not typing", user._id);
+        socket?.emit("not typing", user._id);
 
       currentGroup &&
         Object.keys(currentGroup).length !== 0 &&
-        socket.emit("not typing group", currentGroup.name);
+        socket?.emit("not typing group", currentGroup.name);
 
       setMessage("");
     }

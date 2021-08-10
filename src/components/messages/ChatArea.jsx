@@ -99,7 +99,7 @@ export default function ChatArea() {
   useEffect(() => {
     if (groups && groups.length > 0) {
       groups.forEach((group) => {
-        socket.emit("join group", group.name);
+        socket?.emit("join group", group.name);
       });
     }
   }, [groups, socket]);

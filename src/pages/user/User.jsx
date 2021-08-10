@@ -94,9 +94,9 @@ export default function User() {
     <div className={`userCont ${settings ? "" : " visible"}`}>
       <div className="userHeader">
         <div className="userL">Update Profile</div>
-        <div className="userL logout" onClick={handleLogOut}>
+        <a href="/login" className="userL logout" onClick={handleLogOut}>
           Logout
-        </div>
+        </a>
         <div className="userR">
           <div className="closeUser" onClick={handleClick}>
             &times;

@@ -110,7 +110,7 @@ export default function NotByme({ message }) {
           ? !message.seen
             ? dispatch(setSeen(user.accessToken, message._id))
             : ""
-          : socket.emit("seen message", {
+          : socket?.emit("seen message", {
               id: currentUser._id,
               time: message.createdAt,
             })

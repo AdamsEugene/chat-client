@@ -21,7 +21,7 @@ export default function SendByme({ message }) {
   const [seens, setSeens] = useState([]);
 
   useEffect(() => {
-    socket.on("set seen", (seen) => {
+    socket?.on("set seen", (seen) => {
       setSeens(seen);
     });
   }, [socket]);
@@ -38,7 +38,7 @@ export default function SendByme({ message }) {
       (v, i) =>
         seens.includes(v) &&
         !message.seen &&
-        socket.emit("i have seen", {
+        socket?.emit("i have seen", {
           idm: user._id,
           idu: current_User._id,
           time: rangeOutput[i],
